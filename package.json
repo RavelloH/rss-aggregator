@@ -1,0 +1,28 @@
+{
+  "name": "rss-aggregator",
+  "version": "1.0.0",
+  "description": "RSS聚合器，将多个rss源(本地或url)聚合在同一个rss中",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RavelloH/rss-aggregator.git"
+  },
+  "keywords": [
+    "rss",
+    "aggregator"
+  ],
+  "author": "RavelloH",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RavelloH/rss-aggregator/issues"
+  },
+  "homepage": "https://github.com/RavelloH/rss-aggregator#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "feed": "^4.2.2",
+    "rss-parser": "^3.13.0"
+  }
+}
