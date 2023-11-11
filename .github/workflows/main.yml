@@ -1,0 +1,50 @@
+name: update
+on:
+  schedule:
+    - cron: '30 3/12 * * *' #每日更新
+  watch:
+    types: [started]
+  workflow_dispatch:
+  
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  rss-make:
+    runs-on: ubuntu-latest #运行环境
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: 'Git set'
+        run: |
+             git init
+             git pull
+      - name: 'Setup nodejs'
+        uses: actions/setup-node@v3
+            with:
+                node-version: 'latest'
+      - name: 'Install requirements'
+        run: |
+             npm install
+      - name: 'Feed'
+        run: |
+             node index.js
+      - name: Commit files
+        continue-on-error: True
+        run: |
+          git config --local user.email "dr_hamilton@foxmail.com"
+          git config --local user.name "Ravello-H"
+          git add -A
+          git commit -m "`date '+%Y-%m-%d %H:%M:%S'`"
+          git status
+          git push origin main
+          git status
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
