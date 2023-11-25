@@ -3,7 +3,8 @@ const Feed = require('feed').Feed;
 const path = require('path');
 const chalk = require('chalk');
 const RSSParser = require('rss-parser');
-
+const Rlog = require('rlog-js');
+const log = new Rlog();
 
 const rssList = [
     'atom.xml', // Do not delate this. This could keep your history rss.
@@ -38,24 +39,6 @@ const feed = new Feed({
     author: authorINFO,
 });
 
-const log = {
-    info: function(message) {
-        console.log(`[${chalk.cyan('INFO')}] ${message}`)
-    },
-    warning: function(message) {
-        console.log(`[${chalk.yellow('WARNING')}] ${message}`)
-    },
-    error: function(message) {
-        console.log(`[${chalk.red('ERROR')}] ${message}`)
-    },
-    success: function(message) {
-        console.log(`[${chalk.green('SUCCESS')}] ${chalk.green(message)}`)
-    },
-    exit: function(message) {
-        console.log(`[${chalk.bold.red('EXIT')}] ${chalk.bold.red(message)}`)
-        process.exit()
-    }
-}
 log.info('rss-aggregator v1.0.0')
 
 async function readRSSList(rssList) {
